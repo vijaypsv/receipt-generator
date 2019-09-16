@@ -1,7 +1,7 @@
 package com.taxes.receipt.util;
 
 /**
- * Class that implements the FlyWeight Pattern for creating Strings
+ * Generic String Constants
  * @author vijay
  *
  */
