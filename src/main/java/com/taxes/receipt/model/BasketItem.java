@@ -83,7 +83,7 @@ public class BasketItem {
 	 * @return scaled {@link java.math.BigDecimal BigDecimal}
 	 */
     protected BigDecimal scale(BigDecimal value) {
-		return value.setScale(2, BigDecimal.ROUND_HALF_UP);
+		return value.setScale(2, RoundingMode.HALF_UP);
 	}
 
 	/**
@@ -94,7 +94,7 @@ public class BasketItem {
 	 * @return rounded {@link java.math.BigDecimal BigDecimal}
 	 */
     protected BigDecimal round(BigDecimal value) {
-		BigDecimal rounding = new BigDecimal(DEFAULT_ROUND);
+		BigDecimal rounding = BigDecimal.valueOf(DEFAULT_ROUND);
 		return rounding.signum() == 0 ? value : (value.divide(rounding, 0, RoundingMode.UP)).multiply(rounding);
 	}
 }

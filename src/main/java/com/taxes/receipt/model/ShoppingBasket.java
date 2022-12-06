@@ -52,7 +52,7 @@ public class ShoppingBasket {
         return itemsList
             .stream()
             .map(BasketItem::getTax)
-            .reduce(new BigDecimal(0), (a, b) -> a.add(b));
+            .reduce(new BigDecimal(0), BigDecimal::add);
     }
 
 	/**
@@ -64,7 +64,7 @@ public class ShoppingBasket {
         return itemsList
             .stream()
             .map(BasketItem::getFullPrice)
-            .reduce(new BigDecimal(0), (a, b) -> a.add(b));
+            .reduce(new BigDecimal(0), BigDecimal::add);
     }
 
 	/**
