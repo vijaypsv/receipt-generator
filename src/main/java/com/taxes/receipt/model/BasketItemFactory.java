@@ -1,19 +1,14 @@
-package com.taxes.receipt.model.factory;
+package com.taxes.receipt.model;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.taxes.receipt.model.TaxType;
-import com.taxes.receipt.model.decorator.impl.ImportedTax;
-import com.taxes.receipt.model.decorator.impl.NormalTax;
-import com.taxes.receipt.model.impl.BasketItemImpl;
-import com.taxes.receipt.model.interfaces.BasketItem;
-import com.taxes.receipt.util.StringPool;
+import com.taxes.receipt.constants.ReceiptConstants;
 
 public class BasketItemFactory {
 
-	private Map<String, TaxType> taxTypeMap = new HashMap<>();
+	private final Map<String, TaxType> taxTypeMap = new HashMap<>();
 
 	public BasketItemFactory() {
 		// In the future get our tax type from external source maybe??
@@ -26,8 +21,7 @@ public class BasketItemFactory {
 	}
 
 	/**
-	 * Creates a {@link com.taxes.receipt.model.interfaces.BasketItem
-	 * BasketItem}
+	 * Creates a {@link BasketItem}
 	 * 
 	 * @param price
 	 *            price of the item. I am asuming that this is the price of all
@@ -37,23 +31,23 @@ public class BasketItemFactory {
 	 *            name of the item
 	 * @param quantity
 	 *            quantity
-	 * @return {@link com.taxes.receipt.model.interfaces.BasketItem BasketItem}
+	 * @return {@link BasketItem BasketItem}
 	 *         created
 	 */
 	public BasketItem getBasketItem(BigDecimal price, String name, Integer quantity) {
-		BasketItem item = new BasketItemImpl(price, name, quantity);
+		BasketItem item = new BasketItem(price, name, quantity);
 
 		// Check if its imported
-		boolean imported = name.contains(StringPool.IMPORTED);
+		boolean imported = name.contains(ReceiptConstants.IMPORTED);
 		if (imported) {
-			item = new ImportedTax(item);
-			name = name.replace(StringPool.IMPORTED, StringPool.BLANK);
+			item = new BasketItemImportedTaxDecorator(item);
+			name = name.replace(ReceiptConstants.IMPORTED, ReceiptConstants.BLANK);
 		}
 
 		// Check if it has taxes
 		TaxType taxType = getTaxType(name);
 		if (taxType.equals(TaxType.NORMAL)) {
-			item = new NormalTax(item);
+			item = new BasketItemNormalTaxDecorator(item);
 		}
 
 		return item;

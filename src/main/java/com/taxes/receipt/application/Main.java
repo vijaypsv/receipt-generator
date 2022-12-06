@@ -3,53 +3,50 @@
  */
 package com.taxes.receipt.application;
 
-import com.taxes.receipt.model.impl.ShoppingBasketImpl;
-import com.taxes.receipt.model.interfaces.BasketItem;
-import com.taxes.receipt.model.interfaces.ShoppingBasket;
-import com.taxes.receipt.model.parser.BasketItemParser;
+import com.taxes.receipt.model.BasketItem;
+import com.taxes.receipt.model.ShoppingBasket;
+import com.taxes.receipt.model.BasketItemParser;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class Main {
 
 	public static void main(String[] args) {
-		System.out.println("Input 1");
-		System.out.println("1 book at 12.49");
-		System.out.println("1 music CD at 14.99");
-		System.out.println("1 chocolate bar at 0.85");
+		log.info("Input 1");
+		log.info("1 book at 12.49");
+		log.info("1 music CD at 14.99");
+		log.info("1 chocolate bar at 0.85");
 
 		BasketItemParser parser = new BasketItemParser();
 
 		BasketItem book1 = parser.parse("1 book at 12.49");
 		BasketItem cd1 = parser.parse("1 music CD at 14.99");
 		BasketItem bar1 = parser.parse("1 chocolate bar at 0.85");
-		ShoppingBasket shoppingBasket1 = new ShoppingBasketImpl().add(book1).add(cd1).add(bar1);
-		System.out.println(shoppingBasket1.getReceipt());
+		ShoppingBasket shoppingBasket1 = new ShoppingBasket().add(book1).add(cd1).add(bar1);
+        log.info(shoppingBasket1.getReceipt());
 
-		System.out.println("Input 2");
-		System.out.println("1 imported box of chocolates at 10.00");
-		System.out.println("1 imported bottle of perfume at 47.50 ");
+		log.info("Input 2");
+		log.info("1 imported box of chocolates at 10.00");
+		log.info("1 imported bottle of perfume at 47.50 ");
 
 		BasketItem box = parser.parse("1 imported box of chocolates at 10.00");
 		BasketItem perfume = parser.parse("1 imported bottle of perfume at 47.50");
-		ShoppingBasket shoppingBasket2 = new ShoppingBasketImpl().add(box).add(perfume);
-		System.out.println(shoppingBasket2.getReceipt());
+		ShoppingBasket shoppingBasket2 = new ShoppingBasket().add(box).add(perfume);
+        log.info(shoppingBasket2.getReceipt());
 
-		System.out.println("Input 3");
-		System.out.println("1 imported bottle of perfume at 27.99");
-		System.out.println("1 bottle of perfume at 18.99");
-		System.out.println("1 packet of headache pills at 9.75");
-		System.out.println("1 box of imported chocolates at 11.25");
+		log.info("Input 3");
+		log.info("1 imported bottle of perfume at 27.99");
+		log.info("1 bottle of perfume at 18.99");
+		log.info("1 packet of headache pills at 9.75");
+		log.info("1 box of imported chocolates at 11.25");
 
 		BasketItem importedPerfume = parser.parse("1 imported bottle of perfume at 27.99");
 		BasketItem perfume2 = parser.parse("1 bottle of perfume at 18.99");
 		BasketItem pills = parser.parse("1 packet of headache pills at 9.75");
 		BasketItem chocolates = parser.parse("1 box of imported chocolates at 11.25");
-		ShoppingBasket shoppingBasket3 = new ShoppingBasketImpl().add(importedPerfume).add(perfume2).add(pills)
+		ShoppingBasket shoppingBasket3 = new ShoppingBasket().add(importedPerfume).add(perfume2).add(pills)
 				.add(chocolates);
-		System.out.println(shoppingBasket3.getReceipt());
-
-	}
-
-	public boolean someLibraryMethod() {
-		return true;
+        log.info(shoppingBasket3.getReceipt());
 	}
 }

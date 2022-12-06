@@ -1,18 +1,16 @@
-package com.taxes.receipt.model.decorator;
+package com.taxes.receipt.model;
 
 import java.math.BigDecimal;
 
-import com.taxes.receipt.model.interfaces.BasketItem;
-
 /**
- * Decorator Abtraction for adding taxes 
+ * BasketItem decorator for adding taxes
  * @author vijay
  *
  */
-public abstract class BasketItemDecorator implements BasketItem {
-	private BasketItem basketItem;
+public abstract class BasketItemTaxDecorator extends BasketItem {
+	private final BasketItem basketItem;
 
-	public BasketItemDecorator(BasketItem basketItem) {
+	protected BasketItemTaxDecorator(BasketItem basketItem) {
 		super();
 		this.basketItem = basketItem;
 	}

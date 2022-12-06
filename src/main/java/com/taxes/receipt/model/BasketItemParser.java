@@ -1,17 +1,14 @@
-package com.taxes.receipt.model.parser;
+package com.taxes.receipt.model;
 
 import java.math.BigDecimal;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.taxes.receipt.model.factory.BasketItemFactory;
-import com.taxes.receipt.model.interfaces.BasketItem;
-
 public class BasketItemParser {
 
 	private static final String PATTERN = "(\\d+)\\s(.*?)\\sat\\s(\\d+\\.\\d{2}?)";
 
-	private BasketItemFactory basketItemFactory;
+	private final BasketItemFactory basketItemFactory;
 
 	public BasketItemParser() {
 		basketItemFactory = new BasketItemFactory();

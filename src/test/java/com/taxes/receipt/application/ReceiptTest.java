@@ -7,10 +7,9 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.taxes.receipt.model.impl.ShoppingBasketImpl;
-import com.taxes.receipt.model.interfaces.BasketItem;
-import com.taxes.receipt.model.interfaces.ShoppingBasket;
-import com.taxes.receipt.model.parser.BasketItemParser;
+import com.taxes.receipt.model.BasketItem;
+import com.taxes.receipt.model.BasketItemParser;
+import com.taxes.receipt.model.ShoppingBasket;
 
 public class ReceiptTest {
 	@Test
@@ -19,7 +18,7 @@ public class ReceiptTest {
 		BasketItem book = parser.parse("1 book at 12.49");
 		BasketItem cd = parser.parse("1 music CD at 14.99");
 		BasketItem bar = parser.parse("1 chocolate bar at 0.85");
-		ShoppingBasket shoppingBasket = new ShoppingBasketImpl().add(book).add(cd).add(bar);
+		ShoppingBasket shoppingBasket = new ShoppingBasket().add(book).add(cd).add(bar);
 
 		double expected = 29.83;
 		assertEquals(expected, shoppingBasket.getTotal().doubleValue(), 0.01);
@@ -30,7 +29,7 @@ public class ReceiptTest {
 		BasketItemParser parser = new BasketItemParser();
 		BasketItem box = parser.parse("1 imported box of chocolates at 10.00");
 		BasketItem perfume = parser.parse("1 imported bottle of perfume at 47.50");
-		ShoppingBasket shoppingBasket = new ShoppingBasketImpl().add(box).add(perfume);
+		ShoppingBasket shoppingBasket = new ShoppingBasket().add(box).add(perfume);
 
 		double expected = 65.15;
 		assertEquals(expected, shoppingBasket.getTotal().doubleValue(), 0.01);
@@ -43,7 +42,7 @@ public class ReceiptTest {
 		BasketItem perfume = parser.parse("1 bottle of perfume at 18.99");
 		BasketItem pills = parser.parse("1 packet of headache pills at 9.75");
 		BasketItem chocolates = parser.parse("1 box of imported chocolates at 11.25");
-		ShoppingBasket shoppingBasket = new ShoppingBasketImpl().add(importedPerfume).add(perfume).add(pills)
+		ShoppingBasket shoppingBasket = new ShoppingBasket().add(importedPerfume).add(perfume).add(pills)
 				.add(chocolates);
 
 		double expected = 74.68;
